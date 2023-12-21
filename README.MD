@@ -1,3 +1,8 @@
+# ADO Workitem Assignment
+
+## Description
+This project is a proof of concept for using embeddings to assign workitems to developers based on the similarity of the workitem description to the developer's previous workitems.
+
 ## Setup
 
 1. **Install Python**  
