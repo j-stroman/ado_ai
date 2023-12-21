@@ -1,0 +1,8 @@
+# the actual dataset
+*.csv
+
+# the LLM
+models/*
+
+# python virtual environment
+env/
