@@ -1,9 +1,10 @@
 import re
 import sys
+from constants import raw_csv_file_path
 
 # Specify the file paths
-input_file_path = 'input.csv'
-output_file_path = 'output_sanitized.csv'
+input_file_path = raw_csv_file_path
+output_file_path = input_file_path + '_sanitized.csv'
 if len(sys.argv) > 1:
     input_file_path = sys.argv[1]
     output_file_path = input_file_path.replace('.csv', '_sanitized.csv')

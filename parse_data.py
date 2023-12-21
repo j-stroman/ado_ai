@@ -1,9 +1,10 @@
 import csv
 import re
 import sys
+from constants import raw_csv_file_path
 
-input_file = 'input.csv'
-output_file = 'output.csv'
+input_file = raw_csv_file_path
+output_file = raw_csv_file_path + '_parsed.csv'
 
 if len(sys.argv) > 1:
     input_file = sys.argv[1]

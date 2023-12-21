@@ -1,8 +1,12 @@
 # the actual dataset
 *.csv
 
-# the LLM
+# the LLM(s)
 models/*
 
 # python virtual environment
 env/
+
+# compiled python files
+__pycache__/
+*.pyc

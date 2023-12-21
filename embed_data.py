@@ -4,6 +4,15 @@ import chromadb
 from chromadb.utils import embedding_functions
 from langchain.document_loaders.csv_loader import CSVLoader
 
+from constants import (
+    csv_file_path, 
+    embedding_model_name_or_path, 
+    chromadb_host, 
+    chromadb_port, 
+    vector_collection_name, 
+    csv_metadata_columns
+)
+
 '''
 Process for loading ChromaDB with embeddings for our dataset and then querying the dataset
 
@@ -21,6 +30,7 @@ for example:
 |              Metadata               |   Embedding   |
 |-------------------------------------|---------------|
 | Ticket ID, Assignee, Split Sentence |   [numbers]   |
+|-------------------------------------|---------------|
 
 
 Retrieval Process:
@@ -37,10 +47,7 @@ Retrieval Process:
 '''
 
 # Connect to ChromaDB running in Docker
-chroma_client = chromadb.HttpClient(host="localhost", port=8000)
-collection_name = "workitems"
-csv_file_path = "input.csv"
-model_name = "models/all-MiniLM-L6-v2"
+chroma_client = chromadb.HttpClient(host=chromadb_host, port=chromadb_port)
 
 if len(sys.argv) > 1:
     csv_file_path = sys.argv[1]
@@ -49,7 +56,7 @@ if len(sys.argv) > 1:
 loader = CSVLoader(
     file_path=csv_file_path,
     encoding="utf-8",
-    metadata_columns=["ID", "Assigned To"],
+    metadata_columns=csv_metadata_columns,
 )
 
 data = loader.load()
@@ -76,13 +83,13 @@ creates a sentence_transformers.SentenceTransformer instance using the
 specified model and adds the following method:
   __call__(self, input: Documents) -> Embeddings
 '''
-chroma_embedder = embedding_functions.SentenceTransformerEmbeddingFunction(model_name)
+chroma_embedder = embedding_functions.SentenceTransformerEmbeddingFunction(embedding_model_name_or_path)
 
 # Reset collection
-chroma_client.delete_collection(collection_name)
+chroma_client.delete_collection(vector_collection_name)
 
 # Get or create chroma collection using the specified embedding function (instead of downloading their default)
-collection = chroma_client.get_or_create_collection(name=collection_name, embedding_function=chroma_embedder)
+collection = chroma_client.get_or_create_collection(name=vector_collection_name, embedding_function=chroma_embedder)
 
 # Add documents to the collection
 for doc in data:
