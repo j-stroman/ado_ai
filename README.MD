@@ -2,6 +2,7 @@
 
 ## Description
 This project is a proof of concept for using embeddings to assign workitems to developers based on the similarity of the workitem description to the developer's previous workitems.
+This project can also be used as a template for implementing semantic search with any other data (in CSV format).
 
 ## Pre-requisites
 - Python 3.10
