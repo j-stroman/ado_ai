@@ -53,6 +53,9 @@ After cloning the repository, follow these steps to setup the project:
     flags to the `pip install` command and then build and run the docker image locally.
     ```powershell
     git clone https://github.com/chroma-core/chroma.git
+    ```
+    After modifying the Dockerfile to include `--trusted-host pypi.org --trusted-host files.pythonhosted.org`, build the docker image:
+    ```powershell
     cd chroma
     chroma > docker-compose up -d --build
     ```
