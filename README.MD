@@ -94,11 +94,10 @@ Example data:
     (env) > python embed_data.py "data/workitems_parsed.csv"
     ```    
 4. **Query the Embeddings**  
-  Querying the embeddings will return the top 10 workitems that are most similar to the query workitem.
+  Querying the embeddings will return the top 4 workitems that are most similar to the query workitem along with their similarity score.
     ```bash
     (env) > python query_data.py "description of a ticket"
     ```
-    This will print the top 4 workitems that are most similar to the provided description along with their similarity score.
 
 ## To Do
 
